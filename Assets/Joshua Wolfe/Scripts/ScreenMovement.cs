@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ScreenMovement : MonoBehaviour
 {
+    //hello
     private bool up = true;
     private bool screenChange = false;
 
