@@ -13,6 +13,9 @@ public class PlayerScript : MonoBehaviour
 
     Rigidbody player;
 
+    public GameObject gameOverText;
+    public GameObject gameOverMusic;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +43,9 @@ public class PlayerScript : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("spike"))
         {
+            //GameObject.Find("Game Over Text").SetActive(true);
+            gameOverText.SetActive(true);
+            gameOverMusic.GetComponent<AudioSource>().Play();
             Destroy(gameObject);
         }
     }

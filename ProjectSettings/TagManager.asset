@@ -8,6 +8,7 @@ TagManager:
   - NextLine
   - finish
   - spike
+  - player
   layers:
   - Default
   - TransparentFX
