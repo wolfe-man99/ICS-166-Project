@@ -8,6 +8,11 @@ public class ScreenMovement : MonoBehaviour
     private bool up = true;
     private bool screenChange = false;
 
+    public bool Get_up()
+    {
+        return up;
+    }
+
     // Update is called once per frame
     void Update()
     {
