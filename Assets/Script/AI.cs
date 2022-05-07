@@ -12,22 +12,34 @@ public class AI : MonoBehaviour
     [SerializeField] private Transform walkPoint1;
     [SerializeField] private Transform walkPoint2;
     [SerializeField] private Transform walkPoint3;
+    [SerializeField] private Transform walkpoint4;
     [SerializeField] private float StartTime;
     private bool UsingScreen; // Check if player is using the screen
-    private bool GameOver = false; // Check if the fail state is met
+    private bool GameOverBool = false; // Check if the fail state is met
     private bool walkPoint1_Arrived = false;
-    private bool walkPoint3_Arrived = false;
+    private bool walkPoint3_Arrived = true;
     private bool reset = false;
     GameObject screen; // Game object for the in game screen
+    private Vector3 target;
 
     private void Awake()
     {
         screen = GameObject.Find("Plane"); // Bind the screen to game object to get the bool value of screen
+        target = walkPoint2.position;
+        agent.SetDestination(target);
     }
 
     public bool Get_GameOver()
     {
-        return GameOver;
+        return GameOverBool;
+    }
+
+    public void GameOver()
+    {
+        target = walkpoint4.position;
+        agent.speed = 10;
+        GameOverBool = true;
+        agent.SetDestination(target);
     }
 
     private void CheckPlayerArrival() // Set stages for AI
@@ -68,6 +80,48 @@ public class AI : MonoBehaviour
 
     void Update()
     {
+        if (Vector3.Distance(agent.transform.position, target) < .5f)
+        {
+            if(GameOverBool)
+            {
+                Time.timeScale = 0;
+            }
+
+            if(walkPoint1_Arrived)
+            {
+                if(screen.GetComponent<ScreenMovement>().Get_up())
+                {
+                    Debug.Log("Game Over");
+                    GameOver();
+                }
+                else
+                {
+                    walkPoint1_Arrived = false;
+                    target = walkPoint3.position;
+                }
+            }
+
+            else if (walkPoint3_Arrived) //when ai goes to walk point 2
+            {
+                walkPoint3_Arrived = false;
+                if (Random.RandomRange(1,11) <= 4)
+                {
+                    walkPoint1_Arrived = true;
+                    target = walkPoint1.position;
+                }
+
+                target = walkPoint3.position;
+            }
+            else //when ai goes to walk point 3
+            {
+                walkPoint3_Arrived = true;
+                target = walkPoint2.position;
+            }
+
+            agent.SetDestination(target);
+        }
+
+        /*
         UsingScreen = screen.GetComponent<ScreenMovement>().Get_up();
         CheckPlayerArrival();
 
@@ -94,6 +148,7 @@ public class AI : MonoBehaviour
             {
                 StartCoroutine(CheckPlayer2());
             }
-        }    
+        }
+        */
     }
 }

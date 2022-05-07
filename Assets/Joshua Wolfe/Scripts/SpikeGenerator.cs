@@ -25,7 +25,7 @@ public class SpikeGenerator : MonoBehaviour
 
     public void GenerateSpikeWithGap()
     {
-        float randomint = Random.Range(.1f, 1.2f);
+        float randomint = Random.Range(.2f, 4f);
         Invoke("generateSpike", randomint);
     }
 

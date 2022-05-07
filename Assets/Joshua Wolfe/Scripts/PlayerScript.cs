@@ -47,6 +47,7 @@ public class PlayerScript : MonoBehaviour
             gameOverText.SetActive(true);
             gameOverMusic.GetComponent<AudioSource>().Play();
             Destroy(gameObject);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<AI>().GameOver();
         }
     }
 
