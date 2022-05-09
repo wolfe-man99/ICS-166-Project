@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 //Written by Yilong Tang
 
@@ -21,6 +22,9 @@ public class AI : MonoBehaviour
     private bool reset = false;
     GameObject screen; // Game object for the in game screen
     private Vector3 target;
+    private bool playing = true;
+
+    [SerializeField] private GameObject restartPanel;
 
     private void Awake()
     {
@@ -80,18 +84,24 @@ public class AI : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(agent.transform.position, target) < .5f)
+        if (Vector3.Distance(agent.transform.position, target) < .5f && playing)
         {
             if(GameOverBool)
             {
+                GameObject.Find("Game Over Music").GetComponent<AudioSource>().Stop();
+                GetComponent<AudioSource>().Play();
+                restartPanel.SetActive(true);
+                string score = GameObject.Find("Score").GetComponent<Text>().text;
+                GameObject.Find("Retry").GetComponent<Text>().text += $"<color=red>{score}</color>.";
                 Time.timeScale = 0;
+                playing = false;
             }
 
             if(walkPoint1_Arrived)
             {
                 if(screen.GetComponent<ScreenMovement>().Get_up())
                 {
-                    Debug.Log("Game Over");
+                    //Debug.Log("Game Over");
                     GameOver();
                 }
                 else
@@ -104,14 +114,18 @@ public class AI : MonoBehaviour
             else if (walkPoint3_Arrived) //when ai goes to walk point 2
             {
                 walkPoint3_Arrived = false;
-                if (Random.RandomRange(1,11) <= 4)
+                if (Random.Range(1,101) <= 45)
                 {
                     walkPoint1_Arrived = true;
                     target = walkPoint1.position;
                 }
 
-                target = walkPoint3.position;
+                else
+                {
+                    target = walkPoint3.position;
+                }    
             }
+
             else //when ai goes to walk point 3
             {
                 walkPoint3_Arrived = true;
