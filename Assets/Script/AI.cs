@@ -15,6 +15,7 @@ public class AI : MonoBehaviour
     [SerializeField] private Transform walkPoint3;
     [SerializeField] private Transform walkpoint4;
     [SerializeField] private float StartTime;
+    [SerializeField] private AudioSource walking_sound;
     private bool UsingScreen; // Check if player is using the screen
     private bool GameOverBool = false; // Check if the fail state is met
     private bool walkPoint1_Arrived = false;
@@ -84,6 +85,11 @@ public class AI : MonoBehaviour
 
     void Update()
     {
+        if (agent.velocity.magnitude > 0.15f)
+        {
+            walking_sound.Play();
+        }
+
         if (Vector3.Distance(agent.transform.position, target) < .5f && playing)
         {
             if(GameOverBool)
