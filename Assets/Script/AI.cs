@@ -82,12 +82,17 @@ public class AI : MonoBehaviour
         yield return new WaitForSeconds(2);
         agent.SetDestination(walkPoint3.position);
     }
+    IEnumerator PlayFootstep()
+    {
+        walking_sound.Play();
+        yield return new WaitForSeconds(18);
+    }
 
     void Update()
     {
         if (agent.velocity.magnitude > 0.15f)
         {
-            walking_sound.Play();
+            StartCoroutine(PlayFootstep());
         }
 
         if (Vector3.Distance(agent.transform.position, target) < .5f && playing)
