@@ -20,6 +20,7 @@ public class AI : MonoBehaviour
     private bool GameOverBool = false; // Check if the fail state is met
     private bool walkPoint1_Arrived = false;
     private bool walkPoint3_Arrived = true;
+    private bool footstep_playing = false;
     private bool reset = false;
     GameObject screen; // Game object for the in game screen
     private Vector3 target;
@@ -86,12 +87,14 @@ public class AI : MonoBehaviour
     {
         walking_sound.Play();
         yield return new WaitForSeconds(18);
+        footstep_playing = false;
     }
 
     void Update()
     {
-        if (agent.velocity.magnitude > 0.15f)
+        if (agent.velocity.magnitude > 0.3f && footstep_playing == false)
         {
+            footstep_playing = true;
             StartCoroutine(PlayFootstep());
         }
 
