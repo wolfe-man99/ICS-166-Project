@@ -86,7 +86,7 @@ public class AI : MonoBehaviour
     IEnumerator PlayFootstep()
     {
         walking_sound.Play();
-        yield return new WaitForSeconds(18);
+        yield return new WaitForSeconds(.5f);
         footstep_playing = false;
     }
 
