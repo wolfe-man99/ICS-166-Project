@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     private float gravity;
 
     bool isGrounded = false;
+    public bool CanJump = true;
 
     Rigidbody player;
 
@@ -25,7 +26,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && CanJump)
         {
             player.AddForce(Vector3.up * jumpForce);
             isGrounded = false;

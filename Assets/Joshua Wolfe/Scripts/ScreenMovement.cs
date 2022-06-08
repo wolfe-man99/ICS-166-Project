@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using System.Linq;
 
 public class ScreenMovement : MonoBehaviour
 {
     //hello
     private bool up = true;
     private bool screenChange = false;
+    //private HashSet<KeyCode> Keys;
+
+    private void Awake()
+    {
+        //Keys = new HashSet<KeyCode>((KeyCode[])Enum.GetValues(typeof(KeyCode)));
+    }
 
     public bool Get_up()
     {
