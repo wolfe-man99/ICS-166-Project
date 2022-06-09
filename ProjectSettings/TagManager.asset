@@ -9,6 +9,7 @@ TagManager:
   - finish
   - spike
   - player
+  - Screen
   layers:
   - Default
   - TransparentFX

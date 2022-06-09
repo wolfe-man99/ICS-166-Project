@@ -31,7 +31,7 @@ public class AI : MonoBehaviour
     private void Awake()
     {
         screen = GameObject.Find("Plane"); // Bind the screen to game object to get the bool value of screen
-        target = walkPoint2.position;
+        target = walkPoint3.position;
         agent.SetDestination(target);
     }
 
@@ -92,6 +92,9 @@ public class AI : MonoBehaviour
 
     void Update()
     {
+
+
+        /*
         if (agent.velocity.magnitude > 0.3f && footstep_playing == false)
         {
             footstep_playing = true;
@@ -148,6 +151,7 @@ public class AI : MonoBehaviour
 
             agent.SetDestination(target);
         }
+        /*
 
         /*
         UsingScreen = screen.GetComponent<ScreenMovement>().Get_up();
@@ -177,6 +181,67 @@ public class AI : MonoBehaviour
                 StartCoroutine(CheckPlayer2());
             }
         }
-        */
+        */        
+    }
+
+    private void FixedUpdate()
+    {
+        if (agent.velocity.magnitude > 0.3f && footstep_playing == false)
+        {
+            footstep_playing = true;
+            StartCoroutine(PlayFootstep());
+        }
+
+        if (Vector3.Distance(agent.transform.position, target) < .6f && playing)
+        {
+            if (GameOverBool)
+            {
+                GameObject.Find("Game Over Music").GetComponent<AudioSource>().Stop();
+                GameObject.FindGameObjectWithTag("Screen").GetComponent<AudioSource>().Stop();
+                GetComponent<AudioSource>().Play();
+                restartPanel.SetActive(true);
+                string score = GameObject.Find("Score").GetComponent<Text>().text;
+                GameObject.Find("Retry").GetComponent<Text>().text += $"<color=red>{score}</color>.";
+                Time.timeScale = 0;
+                playing = false;
+            }
+
+            else
+            {
+                if (walkPoint3_Arrived && Random.Range(1, 701) == 1)
+                {
+                    target = walkPoint1.position;
+                    agent.SetDestination(target);
+
+                    walkPoint3_Arrived = false;
+                    walkPoint1_Arrived = true;
+                }
+
+                else if (walkPoint1_Arrived)
+                {
+                    if (screen.GetComponent<ScreenMovement>().Get_up())
+                    {
+                        //Debug.Log("Game Over");
+                        GameOver();
+                    }
+                    
+                    else
+                    {
+                        walkPoint1_Arrived = false;
+                        target = walkPoint2.position;
+                        agent.SetDestination(target);
+                        //walkPoint3_Arrived = true;
+                    }
+                    
+                }
+
+                else
+                {
+                    target = walkPoint3.position;
+                    agent.SetDestination(target);
+                    walkPoint3_Arrived = true;
+                }
+            }
+        }
     }
 }

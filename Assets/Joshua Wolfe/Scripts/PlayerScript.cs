@@ -30,6 +30,7 @@ public class PlayerScript : MonoBehaviour
         {
             player.AddForce(Vector3.up * jumpForce);
             isGrounded = false;
+            GetComponent<AudioSource>().Play();
         }
     }
 

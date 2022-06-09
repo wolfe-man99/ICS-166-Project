@@ -25,6 +25,7 @@ public class Popup : MonoBehaviour
             popUp.SetActive(true);
             popUp_UP = true;
             player.GetComponent<PlayerScript>().CanJump = false;
+            GetComponent<AudioSource>().Play();
         }
 
         if (Input.GetKey(KeyCode.Q) && popUp_UP)

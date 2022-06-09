@@ -14,6 +14,12 @@ public class ScreenMovement : MonoBehaviour
     {
         //Keys = new HashSet<KeyCode>((KeyCode[])Enum.GetValues(typeof(KeyCode)));
     }
+    /*
+    public void PLaySong()
+    {
+        gameObject.GetComponent<AudioSource>().Play();
+    }
+    */
 
     public bool Get_up()
     {
@@ -57,6 +63,7 @@ public class ScreenMovement : MonoBehaviour
         screenChange = false;
 
         up = true;
+        gameObject.GetComponent<AudioSource>().volume = .8f;
     }
 
     IEnumerator moveDown(float t)
@@ -71,5 +78,6 @@ public class ScreenMovement : MonoBehaviour
         screenChange = false;
 
         up = false;
+        gameObject.GetComponent<AudioSource>().volume = .1f;
     }
 }
