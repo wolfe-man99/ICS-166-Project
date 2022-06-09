@@ -552,6 +552,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b790bcf2b8c2deb45b4fa342f9d510f3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7869873546869171050, guid: b790bcf2b8c2deb45b4fa342f9d510f3, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -5611,7 +5615,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.17066668
+  m_VoxelSize: 0.14
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: b89eecf97d654fa4aa3ec82b173ba7f9, type: 2}
 --- !u!4 &1894326142
