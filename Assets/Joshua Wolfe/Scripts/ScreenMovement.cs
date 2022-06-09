@@ -63,7 +63,7 @@ public class ScreenMovement : MonoBehaviour
         screenChange = false;
 
         up = true;
-        gameObject.GetComponent<AudioSource>().volume = .8f;
+        gameObject.GetComponent<AudioSource>().volume = .2f;
     }
 
     IEnumerator moveDown(float t)
@@ -78,6 +78,6 @@ public class ScreenMovement : MonoBehaviour
         screenChange = false;
 
         up = false;
-        gameObject.GetComponent<AudioSource>().volume = .1f;
+        gameObject.GetComponent<AudioSource>().volume = .05f;
     }
 }
